@@ -1,0 +1,251 @@
+section.algoSection {
+  height: 90vh;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  color: #f1f1f1;
+}
+section.algoSection button {
+  position: absolute;
+  top: 0;
+  color: #f1f1f1;
+  background: #4183d7;
+  font-weight: bold;
+  border: 0;
+  border-radius: 10%;
+  padding: 0.2em;
+  left: 4%;
+  font-size: 2em;
+  cursor: pointer;
+}
+section.algoSection button:focus {
+  outline: 0;
+}
+.algobarsContainer {
+  height: 100%;
+}
+ul.sortCanvas {
+  overflow-x: scroll;
+  white-space: nowrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  text-align: center;
+}
+
+ul.sortCanvas li {
+  display: inline-block;
+  padding: 5px;
+  position: relative;
+  background-color: #4183d7;
+  margin: 10px;
+  width: 2em;
+  text-align: left;
+  transition: left 1s;
+  left: 0;
+  bottom: 0;
+}
+
+ul.sortCanvas li span {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+
+@keyframes blueToRed {
+  0% {
+    background-color: #4183d7;
+  }
+  5% {
+    background-color: rgb(241, 44, 44);
+  }
+  100% {
+    background-color: rgb(241, 44, 44);
+  }
+}
+
+@keyframes greenToBlue {
+  0% {
+    background-color: rgb(37, 223, 37);
+  }
+  5% {
+    background-color: #4183d7;
+  }
+  100% {
+    background-color: #4183d7;
+  }
+}
+
+@keyframes greenToRed {
+  0% {
+    background-color: rgb(37, 223, 37);
+  }
+  5% {
+    background-color: rgb(241, 44, 44);
+  }
+  100% {
+    background-color: rgb(241, 44, 44);
+  }
+}
+
+@keyframes blueToGreen {
+  0% {
+    background-color: #4183d7;
+  }
+  5% {
+    background-color: rgb(37, 223, 37);
+  }
+  100% {
+    background-color: rgb(37, 223, 37);
+  }
+}
+
+@keyframes redToBlue {
+  0% {
+    background-color: rgb(241, 44, 44);
+  }
+  5% {
+    background-color: #4183d7;
+  }
+  100% {
+    background-color: #4183d7;
+  }
+}
+
+@keyframes greenToOrange {
+  0% {
+    background-color: rgb(37, 223, 37);
+  }
+  5% {
+    background-color: #caa708;
+  }
+  100% {
+    background-color: #caa708;
+  }
+}
+
+@keyframes redToOrange {
+  0% {
+    background-color: rgb(241, 44, 44);
+  }
+  5% {
+    background-color: #caa708;
+  }
+  100% {
+    background-color: #caa708;
+  }
+}
+@keyframes blueToWhite {
+  0% {
+    background-color: #4183d7;
+  }
+  5% {
+    background-color: #feffb5;
+  }
+  100% {
+    background-color: #feffb5;
+  }
+}
+
+@keyframes whiteToBlue {
+  0% {
+    background-color: #feffb5;
+  }
+  5% {
+    background-color: #4183d7;
+  }
+  100% {
+    background-color: #4183d7;
+  }
+}
+
+@keyframes whiteToRed {
+  0% {
+    background-color: #feffb5;
+  }
+  5% {
+    background-color: rgb(241, 44, 44);
+  }
+  100% {
+    background-color: rgb(241, 44, 44);
+  }
+}
+@keyframes whiteToGreen {
+  0% {
+    background-color: #feffb5;
+  }
+  5% {
+    background-color: rgb(37, 223, 37);
+  }
+  100% {
+    background-color: rgb(37, 223, 37);
+  }
+}
+@keyframes redToGreen {
+  0% {
+    background-color: rgb(241, 44, 44);
+  }
+  5% {
+    background-color: rgb(37, 223, 37);
+  }
+  100% {
+    background-color: rgb(37, 223, 37);
+  }
+}
+
+@keyframes redToBlue {
+  0% {
+    background-color: rgb(241, 44, 44);
+  }
+  5% {
+    background-color: #4183d7;
+  }
+  100% {
+    background-color: #4183d7;
+  }
+}
+
+@keyframes blueToOrange {
+  0% {
+    background-color: #4183d7;
+  }
+  5% {
+    background-color: #caa708;
+  }
+  100% {
+    background-color: #caa708;
+  }
+}
+table {
+  width: auto;
+  height: auto;
+  border: 0.5em #cd6523 solid;
+  padding: 0 0.2em;
+  margin: 1em auto;
+}
+
+td {
+  width: 1em;
+  display: inline-block;
+}
+
+.secondMouse {
+  z-index: 1;
+  position: absolute;
+  right: 5%;
+  left: 0;
+  opacity: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#startMouse {
+  width: 90%;
+  height: auto;
+  z-index: 2;
+  position: absolute;
+  right: 5%;
+  bottom: 0;
+  left: 0;
+}

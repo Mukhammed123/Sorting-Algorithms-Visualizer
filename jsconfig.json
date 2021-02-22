@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "noLib": false,
+      "target": "es2020",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "checkJs": false,
+      "experimentalDecorators": true,
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": [
+          "src/*"
+        ]
+      }
+    },
+    "exclude": [
+      "node_modules"
+    ]
+  }

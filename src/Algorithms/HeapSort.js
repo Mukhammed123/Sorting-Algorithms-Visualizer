@@ -266,14 +266,14 @@ function HeapSort(){
     }
     return (
         <section className="algoSection">
-            <h1>Heap Sort</h1>
+            <h1 className="text-center">Heap Sort</h1>
             <ul className="sortCanvas">
                 {arr.map((value) => {
                     var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
                     return(algobar);
                 })}
             </ul>
-            <button onClick={heapSort}>Sort</button>
+            <button onClick={heapSort} className="btn btn-primary position-absolute top-0 left-0 ms-5">Sort</button>
         </section>
     )
 }

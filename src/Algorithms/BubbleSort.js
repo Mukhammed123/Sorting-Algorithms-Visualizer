@@ -2,14 +2,68 @@ import React from 'react'
 
 import "./algo.css"
 import AlgoBars from './AlgoBars';
-import {max, dict, arr} from 'src/listToBeSorted';
 
 function BubbleSort(){
     var arrIDs=[], animationBars={},globalPushDistance,animationIndex=0;
-    var comparing, bottom, move=0, animationFinished=false, listSorted=false;
+    var comparing, bottom, move=0, animationFinished=true, listSorted=false, arr=[];
+
+    var elements = Math.floor(Math.random()*10) + 3, random, max=0, dict={};
+
+    for(var i=0; i<elements; i++){
+        random = Math.floor(Math.random()*100) + 1;
+        if(random > max) max = random;
+        if(!dict[`${random}`]){
+            arr.push(random);
+            dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+        }
+    }
+    // var [inputList, setInputList ] = useState(`${arr}`);
+    // var [listNumber, setListNumber] = useState(arr);
+    // const updateListNumber = (event) => {
+    //     setInputList(event.target.value);
+    //     // console.log(event.target.value);
+    //     var temp = event.target.value.split(",");
+    //     var flag = true, tempArr = [];
+    //     for(var i=0; i<temp.length;i++) {
+    //         temp[i] = temp[i].trim();
+    //         if(isNaN(temp[i])) {
+    //             alert("The list must contain only decimal numbers");
+    //             flag = false;
+    //             break;
+    //         } else if(temp[i].length > 0) tempArr.push(Number(temp[i]));
+    //     }
+    //     // console.log(tempArr);
+    //     if(flag){
+    //         setListNumber(tempArr);
+    //         arr = [...listNumber];
+    //         console.log(arr);
+    //         console.log(listNumber);
+    //     }
+    // }
+
+    // function submitList() {
+    //     var temp = listNumber.split(',');
+    //     var newList = [];
+    //     if (temp.length > 2) {
+    //         for(var j=0; j<temp.length; j++){
+    //             temp[j] = temp[j].trim();
+    //             if(!isNaN(temp[j])){
+    //                 newList.push(Number(temp[j]));
+    //             }
+    //             else {
+    //                 alert("The list must contain only decimal numbers!");
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     if(newList.length > 2) {
+    //         arr = [...newList];
+    //     }
+    // }
 
     function sortList(){
         if(!listSorted){
+            animationFinished = false;
             var temp,key=1, index=-1,counter=0;
             arrIDs.push(`${arr[0]}-blueToRed`);
             counter++;
@@ -38,9 +92,9 @@ function BubbleSort(){
                 key=1;
             }
             // console.log(arr);
-            // console.log(index)
-            // console.log(arrIDs);
+            // console.log(listNumber);
             for(i=0;i<arr.length; i++){
+                // console.log(arr[i]);
                 animationBars[`${arr[i]}`] = document.getElementById(`${arr[i]}`);
                 animationBars[`${arr[i]}`].style.transition = "left 0.7s, bottom 0.7s";
             }
@@ -49,6 +103,8 @@ function BubbleSort(){
             animationHandler();
             rect = animationBars[`${max}`].getBoundingClientRect();
             bottom = rect.bottom - rect.top + 20;
+            // console.log(index)
+            // console.log(arrIDs)
             temp = arrIDs[index].split("-");
             rect = animationBars[`${temp[0]}`].getBoundingClientRect();
             rect2 = animationBars[`${temp[1]}`].getBoundingClientRect();
@@ -234,15 +290,28 @@ function BubbleSort(){
 
     return(
         <section className="algoSection">
-            <div className="algobarsContainer">
-            <h1>Bubble Sort</h1>
-            <ul className="sortCanvas">
-                {arr.map((value) => {
-                    var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
-                    return(algobar);
-                })}
-            </ul>
-            <button onClick={sortList}>Sort</button>
+            {/* <div className="input-group px-5 mb-3">
+                <input
+                type="text"
+                className="form-control"
+                placeholder="Enter List of Numbers"
+                aria-label="Enter List of Numbers"
+                aria-describedby="button-addon2"
+                onChange={updateListNumber}
+                value={inputList}
+                disabled = {animationFinished ? false : true}
+                />
+        <button onClick={submitList} className="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+        </div> */}
+            <div className="algobarsContainer position-relative">
+                <h1 className="text-center">Bubble Sort</h1>
+                <ul className="sortCanvas">
+                    {arr.map((value) => {
+                        var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
+                        return(algobar);
+                    })}
+                </ul>
+                <button onClick={sortList} className="btn btn-primary position-absolute top-0 left-0 ms-5">Sort</button>
             </div>
         </section>
     )

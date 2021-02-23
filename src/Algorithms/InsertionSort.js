@@ -216,14 +216,14 @@ function InsertionSort(){
 
     return(
         <section className="algoSection">
-            <h1>Insertion Sort</h1>
+            <h1 className="text-center">Insertion Sort</h1>
             <ul className="sortCanvas">
                 {arr.map((value) => {
                     var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
                     return(algobar);
                 })}
             </ul>
-            <button onClick={sortList}>Sort</button>
+            <button onClick={sortList} className="btn btn-primary position-absolute top-0 left-0 ms-5">Sort</button>
         </section>
     )
 }

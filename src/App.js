@@ -1,5 +1,4 @@
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
-import React, {useState} from 'react'
 
 import InsertionSort from 'src/Algorithms/InsertionSort'
 import BubbleSort from 'src/Algorithms/BubbleSort'
@@ -7,15 +6,8 @@ import SelectionSort from 'src/Algorithms/SelectionSort'
 import QuickSort from 'src/Algorithms/QuickSort'
 import MergeSort from 'src/Algorithms/MergeSort'
 import HeapSort from 'src/Algorithms/HeapSort'
-import EnterList from './Components/EnterList'
-import { arr } from 'src/listToBeSorted'
 
 function App() {
-  var [listNumber, setListNumber] = useState(arr);
-  const updateListNumber = (event) => {
-    setListNumber(event.target.value);
-    console.log(event.target.value)
-  }
   return (
     <div className="App">
       <Router>
@@ -74,18 +66,6 @@ function App() {
         </nav>
       </header>
       <div className="content">
-        <div className="input-group px-5">
-        <input
-         type="text"
-         className="form-control"
-         placeholder="Enter List of Numbers"
-         aria-label="Enter List of Numbers"
-         aria-describedby="button-addon2"
-         onChange={updateListNumber}
-         value={listNumber}
-         />
-        <button className="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
-        </div>
         <Switch>
             <Route path="/insertionsort" component={InsertionSort}/>
             <Route path="/bubblesort" component={BubbleSort}/>
@@ -95,7 +75,6 @@ function App() {
             <Route path="/quicksort" component={QuickSort}/>
           </Switch>
       </div>
-      <EnterList/>
       {/* Algorithms */}
       </Router>
     </div>

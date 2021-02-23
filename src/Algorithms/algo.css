@@ -1,26 +1,10 @@
 section.algoSection {
   height: 90vh;
   width: 100%;
-  text-align: center;
   position: relative;
   color: #f1f1f1;
 }
-section.algoSection button {
-  position: absolute;
-  top: 0;
-  color: #f1f1f1;
-  background: #4183d7;
-  font-weight: bold;
-  border: 0;
-  border-radius: 10%;
-  padding: 0.2em;
-  left: 4%;
-  font-size: 2em;
-  cursor: pointer;
-}
-section.algoSection button:focus {
-  outline: 0;
-}
+
 .algobarsContainer {
   height: 100%;
 }

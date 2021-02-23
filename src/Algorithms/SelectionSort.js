@@ -202,7 +202,7 @@ function SelectionSort(){
 
     return(
         <section className="algoSection">
-            <h1>Selection Sort</h1>
+            <h1 className="text-center">Selection Sort</h1>
             <ul className="sortCanvas">
                 <li id="border" style={{backgroundColor: "purple", width: ".2em",
                 margin: "0 0 0.5em 0.5em", padding: 0, left: 0, height: "50%"}}></li>
@@ -211,7 +211,7 @@ function SelectionSort(){
                     return(algobar);
                 })}
             </ul>
-            <button onClick={sortList} style={{position: "absolute", right: 0}}>Sort</button>
+            <button onClick={sortList} className="btn btn-primary position-absolute top-0 left-0 ms-5">Sort</button>
         </section>
     )
 }

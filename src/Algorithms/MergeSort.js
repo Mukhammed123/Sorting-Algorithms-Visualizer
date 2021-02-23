@@ -396,14 +396,14 @@ function MergeSort(){
 
     return(
         <section className="algoSection">
-            <h1>Merge Sort</h1>
+            <h1 className="text-center">Merge Sort</h1>
             <ul className="sortCanvas">
                 {arr.map((value) => {
                     var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
                     return(algobar);
                 })}
             </ul>
-            <button onClick={functionCaller}>Sort</button>
+            <button onClick={functionCaller} className="btn btn-primary position-absolute top-0 left-0 ms-5">Sort</button>
         </section>
     )
 }

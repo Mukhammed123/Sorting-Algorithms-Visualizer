@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+
 import './algo.css'
 import AlgoBars from './AlgoBars';
 
 function InsertionSort(){
-    var arr=[], arrIDs=[], animationBars={},globalPushDistance, animationIndex=0, dict={}, sorted=false, animationFinished=false;
+    var arr=[], arrIDs=[], animationBars={},globalPushDistance, animationIndex=0, dict={}, sorted=false, animationFinished=true;
     var elements = Math.floor(Math.random()*10) + 3, random, max=0, comparing, bottom;
     // var elements = [62, 28, 54, 99, 3], random, max=0, bottom, comparing;
 
@@ -17,9 +18,38 @@ function InsertionSort(){
         }
     }
 
+    const [_, setListNumber] = useState([]);
+
+    for(var i=0; i<elements; i++){
+        random = Math.floor(Math.random()*100) + 1;
+        if(random > max) max = random;
+        if(!dict[`${random}`]){
+            arr.push(random);
+            dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+        }
+    }
+    function generateList() {
+        if(!animationFinished)
+            alert("The animation has not been finished!");
+        else {
+            elements = Math.floor(Math.random()*10) + 3;
+
+            for(var i=0; i<elements; i++){
+                random = Math.floor(Math.random()*100) + 1;
+                if(random > max) max = random;
+                if(!dict[`${random}`]){
+                    arr.push(random);
+                    dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+                }
+            }
+            setListNumber(arr);
+        }
+    }
+
     function sortList(){
         if(!sorted){
-            console.log(arr);
+            animationFinished = false;
+            // console.log(arr);
             var temp,key,chosen=arr[0],counter=0, index=-1,j,num1,num2, i;
             arrIDs.push(`${arr[0]}-sorted`);
             for(i=1; i<arr.length; i++){
@@ -216,14 +246,19 @@ function InsertionSort(){
 
     return(
         <section className="algoSection">
-            <h1 className="text-center">Insertion Sort</h1>
-            <ul className="sortCanvas">
-                {arr.map((value) => {
-                    var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
-                    return(algobar);
-                })}
-            </ul>
-            <button onClick={sortList} className="btn btn-primary position-absolute top-0 left-0 ms-5">Sort</button>
+            <div className="algobarsContainer position-relative">
+                <h1 className="text-center">Insertion Sort</h1>
+                <ul className="sortCanvas">
+                    {arr.map((value) => {
+                        var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
+                        return(algobar);
+                    })}
+                </ul>
+                <div className="position-absolute top-0 start-0 ms-5">
+                    <button onClick={sortList} className="btn btn-primary">Sort</button>
+                    <button onClick={generateList} className="btn btn-primary ms-1">Random</button>
+                </div>
+            </div>
         </section>
     )
 }

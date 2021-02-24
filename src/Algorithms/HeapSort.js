@@ -1,19 +1,37 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './algo.css'
 import AlgoBars from './AlgoBars'
 
 function HeapSort(){
-    var arr = [], arrIDs=[], animationBars={},animationIndex=0, dict={};
-    var elements = Math.floor(Math.random()*10) + 3, random, max=0, bottom;
+    var arr = [], arrIDs=[], animationBars={},animationIndex=0, dict={}, sorted=false;
+    var elements = Math.floor(Math.random()*10) + 3, random, max=0, bottom, animationFinished=true;
     // var elements = [5, 21, 65, 39, 17, 57, 25], random, max=0, bottom;
+
+    const [_, setListNumber] = useState([]);
 
     for(var i=0; i<elements; i++){
         random = Math.floor(Math.random()*100) + 1;
-        // var random = elements[i];
         if(random > max) max = random;
         if(!dict[`${random}`]){
             arr.push(random);
-            dict[`${random}`] = {left: 0, color: "#4183d7", transition: false, animation: false};
+            dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+        }
+    }
+    function generateList() {
+        if(!animationFinished)
+            alert("The animation has not been finished!");
+        else {
+            elements = Math.floor(Math.random()*10) + 3;
+
+            for(var i=0; i<elements; i++){
+                random = Math.floor(Math.random()*100) + 1;
+                if(random > max) max = random;
+                if(!dict[`${random}`]){
+                    arr.push(random);
+                    dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+                }
+            }
+            setListNumber(arr);
         }
     }
     var n = arr.length;
@@ -68,51 +86,59 @@ function HeapSort(){
 // main function to do heap sort 
     function heapSort() 
     { 
-        console.log(arr);
-        var i;
-        // Build heap (rearrange array) 
-        for (i = parseInt(n / 2) - 1; i >= 0; i--) 
-            heapify(arr,n, i); 
-    
-        // One by one extract an element from heap 
-        for (i=n-1; i>0; i--) 
-        { 
-            // Move current root to end
-            // console.log(`push-${arr[0]}-${arr[i]}`);
-            arrIDs.push(`calculate-${arr[0]}-${arr[i]}`);
-            arrIDs.push(`move-${arr[0]}`);
-            arrIDs.push(`move-${arr[i]}`);
-            arrIDs.push(`up-${arr[0]}-${arr[i]}`);
-            var temp = arr[i];
-            arr[i] = arr[0];
-            arr[0] = temp;
-            arrIDs.push(`fixed-${arr[i]}`);
-            // call max heapify on the reduced heap 
-            heapify(arr,i, 0); 
-        } 
         // console.log(arr);
-        // console.log(arrIDs);
-        var element;
-        for(i=0;i<arr.length;i++){
-            element = document.getElementById(`${arr[i]}`);
-            element.style.transition = "bottom 0.7s linear, left 0.7s linear";
-            element.style.transitionDelay = "0.1s";
-            animationBars[`${arr[i]}`] = element;
+        if(!sorted){
+            animationFinished = false;
+            var i;
+            // Build heap (rearrange array) 
+            for (i = parseInt(n / 2) - 1; i >= 0; i--) 
+                heapify(arr,n, i); 
+        
+            // One by one extract an element from heap 
+            for (i=n-1; i>0; i--) 
+            { 
+                // Move current root to end
+                // console.log(`push-${arr[0]}-${arr[i]}`);
+                arrIDs.push(`calculate-${arr[0]}-${arr[i]}`);
+                arrIDs.push(`move-${arr[0]}`);
+                arrIDs.push(`move-${arr[i]}`);
+                arrIDs.push(`up-${arr[0]}-${arr[i]}`);
+                var temp = arr[i];
+                arr[i] = arr[0];
+                arr[0] = temp;
+                arrIDs.push(`fixed-${arr[i]}`);
+                // call max heapify on the reduced heap 
+                heapify(arr,i, 0); 
+            } 
+            sorted = true;
+            // console.log(arr);
+            // console.log(arrIDs);
+            var element;
+            for(i=0;i<arr.length;i++){
+                element = document.getElementById(`${arr[i]}`);
+                element.style.transition = "bottom 0.7s linear, left 0.7s linear";
+                element.style.transitionDelay = "0.1s";
+                animationBars[`${arr[i]}`] = element;
+            }
+            var rect = animationBars[`${max}`].getBoundingClientRect();
+            bottom = rect.bottom - rect.top + 20;
+            // console.log(bottom);
+            var check = arrIDs[0].split("-");
+            var num1 = check[1];
+            var num2 = check[2];
+            dict[`${num2}`].animation = true;
+            animationBars[`${num1}`].style.animation= "blueToWhite 0.4s forwards";
+            animationBars[`${num2}`].style.animation = "blueToWhite 0.4s forwards";
+            dict[`${num1}`].color = "#FEFFB5";
+            dict[`${num2}`].color = "#FEFFB5";
+            animationBars[`${num1}`].style.color = "#767680";
+            animationBars[`${num2}`].style.color = "#767680";
+            animationBars[`${num2}`].addEventListener("animationend",startAnimation);
         }
-        var rect = animationBars[`${max}`].getBoundingClientRect();
-        bottom = rect.bottom - rect.top + 20;
-        // console.log(bottom);
-        var check = arrIDs[0].split("-");
-        var num1 = check[1];
-        var num2 = check[2];
-        dict[`${num2}`].animation = true;
-        animationBars[`${num1}`].style.animation= "blueToWhite 0.4s forwards";
-        animationBars[`${num2}`].style.animation = "blueToWhite 0.4s forwards";
-        dict[`${num1}`].color = "#FEFFB5";
-        dict[`${num2}`].color = "#FEFFB5";
-        animationBars[`${num1}`].style.color = "#767680";
-        animationBars[`${num2}`].style.color = "#767680";
-        animationBars[`${num2}`].addEventListener("animationend",startAnimation);
+        else {
+            alert("The list is sorted");
+        }
+        animationFinished = true;
     }
 
     function compareFunction(){
@@ -266,14 +292,19 @@ function HeapSort(){
     }
     return (
         <section className="algoSection">
-            <h1 className="text-center">Heap Sort</h1>
-            <ul className="sortCanvas">
-                {arr.map((value) => {
-                    var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
-                    return(algobar);
-                })}
-            </ul>
-            <button onClick={heapSort} className="btn btn-primary position-absolute top-0 left-0 ms-5">Sort</button>
+            <div className="algobarsContainer position-relative">
+                <h1 className="text-center">Heap Sort</h1>
+                <ul className="sortCanvas">
+                    {arr.map((value) => {
+                        var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
+                        return(algobar);
+                    })}
+                </ul>
+                <div className="position-absolute top-0 start-0 ms-5">
+                    <button onClick={heapSort} className="btn btn-primary">Sort</button>
+                    <button onClick={generateList} className="btn btn-primary ms-1">Random</button>
+                </div>
+            </div>
         </section>
     )
 }

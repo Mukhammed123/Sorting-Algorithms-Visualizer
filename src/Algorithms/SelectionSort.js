@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './algo.css'
 import AlgoBars from './AlgoBars'
 // why did you not use transition instead of animation
@@ -9,21 +9,40 @@ function SelectionSort(){
     var arr=[], arrIDs=[], animationBars={},distance,dict = {}, max=0;
     var animationIndex, fullAnimation=[], borderDistance=0;
 
-    var elements = Math.floor(Math.random()*10) + 5, random, listSorted=false, animationFinished=false;
+    var elements = Math.floor(Math.random()*10) + 5, random, listSorted=false, animationFinished=true;
     // var elements = [62, 28, 76, 91, 18, 21, 7, 51, 54, 99, 3];
+
+    const [_, setListNumber] = useState([]);
 
     for(var i=0; i<elements; i++){
         random = Math.floor(Math.random()*100) + 1;
-        // var random = elements[i];
         if(random > max) max = random;
         if(!dict[`${random}`]){
             arr.push(random);
-            dict[`${random}`] = {left: 0, color: "blue", transition: false, animation: false}
+            dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+        }
+    }
+    function generateList() {
+        if(!animationFinished)
+            alert("The animation has not been finished!");
+        else {
+            elements = Math.floor(Math.random()*10) + 3;
+
+            for(var i=0; i<elements; i++){
+                random = Math.floor(Math.random()*100) + 1;
+                if(random > max) max = random;
+                if(!dict[`${random}`]){
+                    arr.push(random);
+                    dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+                }
+            }
+            setListNumber(arr);
         }
     }
 
     function sortList(){
         if(!listSorted){
+            animationFinished = false;
             var temp,key=1,index=0,prevKey, foundKey = false, moved = false, i;
             for(i=0; i<arr.length-1; i++){
                 foundKey = false;
@@ -202,16 +221,21 @@ function SelectionSort(){
 
     return(
         <section className="algoSection">
-            <h1 className="text-center">Selection Sort</h1>
-            <ul className="sortCanvas">
-                <li id="border" style={{backgroundColor: "purple", width: ".2em",
-                margin: "0 0 0.5em 0.5em", padding: 0, left: 0, height: "50%"}}></li>
-                {arr.map((value) => {
-                    var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
-                    return(algobar);
-                })}
-            </ul>
-            <button onClick={sortList} className="btn btn-primary position-absolute top-0 left-0 ms-5">Sort</button>
+            <div className="algobarsContainer position-relative">
+                <h1 className="text-center">Selection Sort</h1>
+                <ul className="sortCanvas">
+                    <li id="border" style={{backgroundColor: "purple", width: ".2em",
+                    margin: "0 0 0.5em 0.5em", padding: 0, left: 0, height: "50%"}}></li>
+                    {arr.map((value) => {
+                        var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
+                        return(algobar);
+                    })}
+                </ul>
+                <div className="position-absolute top-0 start-0 ms-5">
+                    <button onClick={sortList} className="btn btn-primary">Sort</button>
+                    <button onClick={generateList} className="btn btn-primary ms-1">Random</button>
+                </div>
+            </div>
         </section>
     )
 }

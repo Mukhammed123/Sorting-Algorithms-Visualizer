@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./algo.css";
 import AlgoBars from "./AlgoBars";
 
@@ -14,7 +14,7 @@ function QuickSort() {
     bottom,
     prevPivot,
     listSorted=false,
-    animationFinished=false;
+    animationFinished=true;
   // var elements = [5, 21, 65, 39, 17, 57, 25], random, max=0, bottom, prevPivot, pivot=elements[elements.length-1];
 
   for (var i = 0; i < elements; i++) {
@@ -31,6 +31,35 @@ function QuickSort() {
       };
     }
   }
+  
+  const [_, setListNumber] = useState([]);
+
+    for(var i=0; i<elements; i++){
+        random = Math.floor(Math.random()*100) + 1;
+        if(random > max) max = random;
+        if(!dict[`${random}`]){
+            arr.push(random);
+            dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+        }
+    }
+    function generateList() {
+        if(!animationFinished)
+            alert("The animation has not been finished!");
+        else {
+            elements = Math.floor(Math.random()*10) + 3;
+
+            for(var i=0; i<elements; i++){
+                random = Math.floor(Math.random()*100) + 1;
+                if(random > max) max = random;
+                if(!dict[`${random}`]){
+                    arr.push(random);
+                    dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+                }
+            }
+            setListNumber(arr);
+        }
+    }
+
   var pivot = arr[arr.length - 1];
   var n = arr.length;
   function partition(arr, low, high) {
@@ -100,6 +129,7 @@ function QuickSort() {
 
   function startSorting() {
     if(!listSorted){
+      animationFinished = false;
       //console.log(arr);
       quickSort(arr, 0, n - 1);
       listSorted = true;
@@ -339,14 +369,19 @@ function QuickSort() {
   }
   return (
     <section className="algoSection">
-    <h1 className="text-center">Quick Sort</h1>
-      <ul className="sortCanvas">
-        {arr.map((value) => {
-          var algobar = <AlgoBars number={value} maxValue={max} key={value} />;
-          return algobar;
-        })}
-      </ul>
-      <button onClick={startSorting} className="btn btn-primary position-absolute top-0 left-0 ms-5">Sort</button>
+      <div className="algobarsContainer position-relative">
+          <h1 className="text-center">Quick Sort</h1>
+          <ul className="sortCanvas">
+              {arr.map((value) => {
+                  var algobar = <AlgoBars number={value} maxValue={max} key={value}/>
+                  return(algobar);
+              })}
+          </ul>
+          <div className="position-absolute top-0 start-0 ms-5">
+              <button onClick={startSorting} className="btn btn-primary">Sort</button>
+              <button onClick={generateList} className="btn btn-primary ms-1">Random</button>
+          </div>
+      </div>
     </section>
   );
 }

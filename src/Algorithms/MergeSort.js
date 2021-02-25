@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import "./algo.css"
 import AlgoBars from './AlgoBars';
 
@@ -24,35 +24,35 @@ function MergeSort(){
         }
     }
 
-    const [, setListNumber] = useState(arr);
+    // const [, setListNumber] = useState(arr);
 
-    function generateList() {
-        if(!animationFinished)
-            alert("The animation has not been finished!");
-        else {
-            arr = [];
-            dict = {};
-            elements = Math.floor(Math.random()*10) + 3;
+    // function generateList() {
+    //     if(!animationFinished)
+    //         alert("The animation has not been finished!");
+    //     else {
+    //         arr = []; dict = {};
+    //         listSorted = false;
+    //         elements = Math.floor(Math.random()*10) + 3;
 
-            for(var i=0; i<elements; i++){
-                random = Math.floor(Math.random()*100) + 1;
-                index = i;
-                if(index >= colorList.length){
-                    index = colorCounter;
-                    colorCounter++;
-                }
-                // var random = elements[i];
-                if(random > max) max = random;
-                if(!dict[`${random}`]){
-                    arr.push(random);
-                    dict[`${random}`] = {left: 0, bottom:0, original:0, parent: `${random}`, color: `${colorList[index]}`, transition: false};
-                }
-            }
-            setListNumber(arr);
-            // console.log(arr);
-            // console.log(listNumber);
-        }
-    }
+    //         for(var i=0; i<elements; i++){
+    //             random = Math.floor(Math.random()*100) + 1;
+    //             index = i;
+    //             if(index >= colorList.length){
+    //                 index = colorCounter;
+    //                 colorCounter++;
+    //             }
+    //             // var random = elements[i];
+    //             if(random > max) max = random;
+    //             if(!dict[`${random}`]){
+    //                 arr.push(random);
+    //                 dict[`${random}`] = {left: 0, bottom:0, original:0, parent: `${random}`, color: "#31DE0A", transition: false};
+    //             }
+    //         }
+    //         setListNumber(arr);
+    //         // console.log(arr);
+    //         // console.log(listNumber);
+    //     }
+    // }
 
     // console.log(arr)
     function merge(l,m,r){
@@ -228,6 +228,7 @@ function MergeSort(){
             }
             finishLeftOver();
         }
+        animationFinished = true;
     }
     function finishLeftOver(){
         // console.log("finishLeftOver is CALLED")
@@ -261,7 +262,6 @@ function MergeSort(){
         }
         if(flag)
             leftOverIndex++;
-        animationFinished = true;
     }
     function moveDownLeftOver(){
         // console.log("moveDownLeftOver is CALLED")
@@ -439,7 +439,7 @@ function MergeSort(){
                 </ul>
                 <div className="position-absolute top-0 start-0 ms-5">
                     <button onClick={functionCaller} className="btn btn-primary">Sort</button>
-                    <button onClick={generateList} className="btn btn-primary ms-1">Random</button>
+                    {/* <button onClick={generateList} className="btn btn-primary ms-1">Random</button> */}
                 </div>
             </div>
         </section>

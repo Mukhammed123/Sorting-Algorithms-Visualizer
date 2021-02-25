@@ -67,7 +67,7 @@ function App() {
       </header>
       <div className="content">
         <Switch>
-            <Route path="/" component={InsertionSort}/>
+            <Route path="/" exact component={InsertionSort}/>
             <Route path="/insertionsort" component={InsertionSort}/>
             <Route path="/bubblesort" component={BubbleSort}/>
             <Route path="/selectionsort" component={SelectionSort}/>

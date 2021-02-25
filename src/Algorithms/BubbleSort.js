@@ -7,7 +7,7 @@ function BubbleSort(){
     var arrIDs=[], animationBars={},globalPushDistance,animationIndex=0, max=0, dict={};
     var comparing, bottom, move=0, animationFinished=true, listSorted=false, arr=[];
 
-    const [_, setListNumber] = useState([]);
+    const [, setListNumber] = useState([]);
 
     var elements = Math.floor(Math.random()*10) + 3, random;
 
@@ -24,6 +24,7 @@ function BubbleSort(){
             alert("The animation has not been finished!");
         else {
             elements = Math.floor(Math.random()*10) + 3;
+            arr = []; dict = {};
 
             for(var i=0; i<elements; i++){
                 random = Math.floor(Math.random()*100) + 1;

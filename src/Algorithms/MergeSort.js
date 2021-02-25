@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import "./algo.css"
 import AlgoBars from './AlgoBars';
 
@@ -24,33 +24,36 @@ function MergeSort(){
         }
     }
 
-    const [_, setListNumber] = useState([]);
+    const [, setListNumber] = useState(arr);
 
-    for(var i=0; i<elements; i++){
-        random = Math.floor(Math.random()*100) + 1;
-        if(random > max) max = random;
-        if(!dict[`${random}`]){
-            arr.push(random);
-            dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
-        }
-    }
     function generateList() {
         if(!animationFinished)
             alert("The animation has not been finished!");
         else {
+            arr = [];
+            dict = {};
             elements = Math.floor(Math.random()*10) + 3;
 
             for(var i=0; i<elements; i++){
                 random = Math.floor(Math.random()*100) + 1;
+                index = i;
+                if(index >= colorList.length){
+                    index = colorCounter;
+                    colorCounter++;
+                }
+                // var random = elements[i];
                 if(random > max) max = random;
                 if(!dict[`${random}`]){
                     arr.push(random);
-                    dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+                    dict[`${random}`] = {left: 0, bottom:0, original:0, parent: `${random}`, color: `${colorList[index]}`, transition: false};
                 }
             }
             setListNumber(arr);
+            // console.log(arr);
+            // console.log(listNumber);
         }
     }
+
     // console.log(arr)
     function merge(l,m,r){
         var i,j,k;
@@ -114,7 +117,6 @@ function MergeSort(){
 
     function functionCaller(){
         if(!listSorted){
-            animationFinished = false;
             var element;
             // console.log(arr);
             for(var i=0;i<arr.length;i++){
@@ -140,6 +142,7 @@ function MergeSort(){
         document.getElementById(`${arr[arr.length-1]}`).removeEventListener("transitionend", startAnimation);
         sortFunction(0,arr.length-1);
         listSorted = true;
+        animationFinished = false;
         // console.log(arrIDs);
         var rect,rect2,temp,i;
         rect = animationBars[`${max}`].getBoundingClientRect();
@@ -258,6 +261,7 @@ function MergeSort(){
         }
         if(flag)
             leftOverIndex++;
+        animationFinished = true;
     }
     function moveDownLeftOver(){
         // console.log("moveDownLeftOver is CALLED")

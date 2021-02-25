@@ -18,21 +18,14 @@ function InsertionSort(){
         }
     }
 
-    const [_, setListNumber] = useState([]);
+    const [, setListNumber] = useState([]);
 
-    for(var i=0; i<elements; i++){
-        random = Math.floor(Math.random()*100) + 1;
-        if(random > max) max = random;
-        if(!dict[`${random}`]){
-            arr.push(random);
-            dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
-        }
-    }
     function generateList() {
         if(!animationFinished)
             alert("The animation has not been finished!");
         else {
             elements = Math.floor(Math.random()*10) + 3;
+            arr = []; dict = {};
 
             for(var i=0; i<elements; i++){
                 random = Math.floor(Math.random()*100) + 1;

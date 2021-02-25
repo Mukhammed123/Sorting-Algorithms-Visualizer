@@ -7,7 +7,7 @@ function HeapSort(){
     var elements = Math.floor(Math.random()*10) + 3, random, max=0, bottom, animationFinished=true;
     // var elements = [5, 21, 65, 39, 17, 57, 25], random, max=0, bottom;
 
-    const [_, setListNumber] = useState([]);
+    const [, setListNumber] = useState([]);
 
     for(var i=0; i<elements; i++){
         random = Math.floor(Math.random()*100) + 1;
@@ -22,6 +22,7 @@ function HeapSort(){
             alert("The animation has not been finished!");
         else {
             elements = Math.floor(Math.random()*10) + 3;
+            arr = []; dict = {};
 
             for(var i=0; i<elements; i++){
                 random = Math.floor(Math.random()*100) + 1;

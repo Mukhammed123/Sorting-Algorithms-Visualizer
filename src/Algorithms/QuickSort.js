@@ -8,7 +8,7 @@ function QuickSort() {
     animationBars = {},
     animationIndex = 0,
     dict = {};
-  var elements = Math.floor(Math.random() * 10) + 3,
+  var elements = Math.floor(Math.random() * 10) + 3, i,
     random,
     max = 0,
     bottom,
@@ -17,7 +17,7 @@ function QuickSort() {
     animationFinished=true;
   // var elements = [5, 21, 65, 39, 17, 57, 25], random, max=0, bottom, prevPivot, pivot=elements[elements.length-1];
 
-  for (var i = 0; i < elements; i++) {
+  for (i = 0; i < elements; i++) {
     random = Math.floor(Math.random() * 100) + 1;
     // var random = elements[i];
     if (random > max) max = random;
@@ -32,9 +32,9 @@ function QuickSort() {
     }
   }
   
-  const [_, setListNumber] = useState([]);
+  const [, setListNumber] = useState([]);
 
-    for(var i=0; i<elements; i++){
+    for(i=0; i<elements; i++){
         random = Math.floor(Math.random()*100) + 1;
         if(random > max) max = random;
         if(!dict[`${random}`]){
@@ -47,14 +47,15 @@ function QuickSort() {
             alert("The animation has not been finished!");
         else {
             elements = Math.floor(Math.random()*10) + 3;
+            dict = {}; arr = [];
 
             for(var i=0; i<elements; i++){
-                random = Math.floor(Math.random()*100) + 1;
-                if(random > max) max = random;
-                if(!dict[`${random}`]){
-                    arr.push(random);
-                    dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
-                }
+              random = Math.floor(Math.random()*100) + 1;
+              if(random > max) max = random;
+              if(!dict[`${random}`]){
+                  arr.push(random);
+                  dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
+              }
             }
             setListNumber(arr);
         }

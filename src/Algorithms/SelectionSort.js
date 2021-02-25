@@ -12,8 +12,6 @@ function SelectionSort(){
     var elements = Math.floor(Math.random()*10) + 5, random, listSorted=false, animationFinished=true;
     // var elements = [62, 28, 76, 91, 18, 21, 7, 51, 54, 99, 3];
 
-    const [_, setListNumber] = useState([]);
-
     for(var i=0; i<elements; i++){
         random = Math.floor(Math.random()*100) + 1;
         if(random > max) max = random;
@@ -22,10 +20,13 @@ function SelectionSort(){
             dict[`${random}`] = {left: 0, bottom:0, color: "blue", transition: false, animation: false, sorted: false, comparing: false};
         }
     }
+    const [, setListNumber] = useState(arr);
     function generateList() {
         if(!animationFinished)
             alert("The animation has not been finished!");
         else {
+            arr = [];
+            dict = {};
             elements = Math.floor(Math.random()*10) + 3;
 
             for(var i=0; i<elements; i++){
